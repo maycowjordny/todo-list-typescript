@@ -1,0 +1,24 @@
+header{
+    display: flex;
+    align-items: center;
+    gap:0.75rem;
+    justify-content: center;
+}
+
+h2{
+font-family:'Inter';
+font-size: 2.5rem;
+font-style: normal;
+font-weight: 900;
+line-height: normal;
+margin: 4.5rem 0 5rem  ;
+
+}
+
+header h2 span:nth-child(1){
+    color: var(--blue);
+}
+
+header h2 span:nth-child(2){
+    color: var(--purple-dark);
+}
