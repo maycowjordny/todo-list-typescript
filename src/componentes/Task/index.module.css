@@ -1,0 +1,112 @@
+.taskWrapper{
+    width: 100%;
+    padding: 1rem;
+    border-radius: 7px;
+    background: var(--gray-500);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+p{
+    color: var(--gray-100);
+    font-family: 'Inter';
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+}
+.taskWrapper button{
+    background: transparent;
+    border: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--gray-300);
+    transition: 300ms;
+}
+
+.button:hover{
+    color: var(--red); 
+}
+
+.container {
+    display: block;
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    font-size:1.5rem;
+  }
+  
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.1rem;
+    height: 1.1rem;
+    background-color: transparent;
+    border: 2px solid var(--blue);
+    border-radius: 50%;
+  }
+  
+  .container:hover input ~ .checkmark {
+    background: var(--blue-dark);
+    
+  }
+  
+  .container input:checked ~ .checkmark {
+    background-color: var( --purple-dark);
+  }
+  
+  .container .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 4px;
+    top: 1px;
+    width: 3px;
+    height: 7px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+
+  @media(max-width:700px){
+
+   
+    .container .checkmark:after {
+        left: 3px;
+        top: 0px;
+        width: 3px;
+        height: 7px;
+      }
+      
+}
+
+@media(min-width:1900px){
+
+   
+    .container .checkmark:after {
+        left: 7px;
+        top: 5px;
+        width: 3px;
+        height: 7px;
+      }
+      
+}
