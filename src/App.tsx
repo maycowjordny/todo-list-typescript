@@ -5,16 +5,42 @@ import { BsPlusCircle } from "react-icons/bs";
 import styles from "./app.module.css"
 import { Task } from "./componentes/Task";
 import noTasksSvg from "./assets/noTasksIcon.svg"
+import { useState } from "react";
+
 export function App() {
 
-  const Tasks = true
+  interface TaskProps {
+    completed: boolean
+    id: number
+    description: string
+  }
+
+  const [tasks, setTasks] = useState<TaskProps[]>([])
+  const [description, setDescription] = useState("")
+
+
+  function handleCreateTask() {
+    const task = {
+      description: description,
+      id: Date.now(),
+      completed: false
+    }
+    setTasks((oldTasks) => [...oldTasks, task])
+  }
+
+
   return (
     <>
       <Header />
       <main className={styles.main}>
         <div className={styles.inputWrapper}>
-          <input type="text" placeholder="Adicione uma nova tarefa" />
-          <button>Criar <BsPlusCircle size={16} /></button>
+          <input
+            type="text"
+            value={description}
+            placeholder="Adicione uma nova tarefa"
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <button onClick={() => handleCreateTask()}>Criar <BsPlusCircle size={16} /></button>
         </div>
         <div className={styles.tasksWrapper}>
           <div className={styles.completedTasks}>
@@ -27,14 +53,17 @@ export function App() {
           </div>
         </div>
         {
-          Tasks ?
+          tasks.length ?
             <>
-              <Task />
-              <Task />
-              <Task />
-              <Task />
-              <Task />
-              <Task />
+              {
+                tasks.map(task => (
+                  < Task
+                    key={task.id}
+                    data={task}
+                  />
+                ))
+              }
+
             </>
             :
             <div className={styles.noTasksWrapper}>

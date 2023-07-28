@@ -1,10 +1,10 @@
 .taskWrapper{
-    width: 100%;
-    padding: 1rem;
-    border-radius: 7px;
+  min-width: 20rem;
+    padding: 1% 5%;
+    border-radius:0.5rem;
     background: var(--gray-500);
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 0.75rem;
     margin-bottom: 0.5rem;
@@ -17,7 +17,10 @@ p{
     font-style: normal;
     font-weight: 400;
     line-height: 140%;
+    white-space: normal;
 }
+
+
 .taskWrapper button{
     background: transparent;
     border: none;
@@ -72,10 +75,10 @@ p{
     content: "";
     position: absolute;
     display: none;
-    left: 4px;
-    top: 1px;
-    width: 3px;
-    height: 7px;
+    left: 0.3rem;
+    top: 0.1rem;
+    width:0.2rem;
+    height: 0.5rem;
     border: solid white;
     border-width: 0 2px 2px 0;
     -webkit-transform: rotate(45deg);
@@ -88,25 +91,21 @@ p{
   }
 
   @media(max-width:700px){
-
-   
     .container .checkmark:after {
-        left: 3px;
+        left: 0.3rem;
         top: 0px;
-        width: 3px;
-        height: 7px;
+        width: 0.2rem;
+        height: 0.5rem;
       }
-      
 }
 
 @media(min-width:1900px){
 
    
     .container .checkmark:after {
-        left: 7px;
-        top: 5px;
-        width: 3px;
-        height: 7px;
+        left: 0.3rem;
+        top: 0.1rem;
+        
       }
       
 }
