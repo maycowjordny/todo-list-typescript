@@ -4,10 +4,21 @@ import { Trash } from "@phosphor-icons/react"
 
 export function Task(props: any) {
 
+    const [completed, setCompleted] = useState(props.data.completed)
+
+    function handleCheckBox(e: React.ChangeEvent<HTMLInputElement>) {
+        setCompleted(e.target.checked)
+
+    }
+
+
     return (
         <div className={styles.taskWrapper}>
             <label className={styles.container}>
-                <input type="checkbox" />
+                <input type="checkbox"
+                    onChange={handleCheckBox}
+                    value={completed}
+                />
                 <span className={styles.checkmark}></span>
             </label>
             <div id={styles.description}>

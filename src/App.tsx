@@ -18,6 +18,7 @@ export function App() {
   const [tasks, setTasks] = useState<TaskProps[]>([])
   const [description, setDescription] = useState("")
 
+  console.log(tasks);
 
   function handleCreateTask() {
     const task = {
@@ -26,7 +27,10 @@ export function App() {
       completed: false
     }
     setTasks((oldTasks) => [...oldTasks, task])
+    localStorage.setItem("@tasks", JSON.stringify(tasks))
+
   }
+
 
 
   return (
@@ -44,8 +48,8 @@ export function App() {
         </div>
         <div className={styles.tasksWrapper}>
           <div className={styles.completedTasks}>
-            <h2>Tarefas Concluídas</h2>
-            <span>5</span>
+            <h2>Tarefas criadas</h2>
+            <span>{tasks.length}</span>
           </div>
           <div className={styles.createTasks}>
             <h2>Tarefas Concluídas</h2>
