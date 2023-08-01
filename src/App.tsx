@@ -1,11 +1,10 @@
-
-import "./global.css"
-import { Header } from "./componentes/Header"
+import "./global.css";
+import { Header } from "./componentes/Header";
 import { BsPlusCircle } from "react-icons/bs";
-import styles from "./app.module.css"
+import styles from "./app.module.css";
 import { Task } from "./componentes/Task";
-import noTasksSvg from "./assets/noTasksIcon.svg"
-import { useState } from "react";
+import noTasksSvg from "./assets/noTasksIcon.svg";
+import { useEffect, useState } from "react";
 
 export function App() {
 
@@ -18,7 +17,15 @@ export function App() {
   const [tasks, setTasks] = useState<TaskProps[]>([])
   const [description, setDescription] = useState("")
 
-  console.log(tasks);
+  useEffect(() => {
+    function fetchTasks() {
+      const response = JSON.parse(localStorage.getItem("@tasks")!)
+      if (response) {
+        setTasks(response.tasks)
+      }
+    }
+    fetchTasks()
+  }, [])
 
   function handleCreateTask() {
     const task = {
@@ -27,11 +34,32 @@ export function App() {
       completed: false
     }
     setTasks((oldTasks) => [...oldTasks, task])
-    localStorage.setItem("@tasks", JSON.stringify(tasks))
-
+    localStorage.setItem("@tasks", JSON.stringify({ tasks: [...tasks, task] }));
+    setDescription("")
   }
 
+  const checkboxChange = (id: number, checked: boolean) => {
 
+    const updatedTasks = tasks.map((task: any) => {
+
+      if (task.id === id) {
+        return { ...task, completed: checked }
+      }
+      return task
+    })
+    setTasks(updatedTasks);
+    localStorage.setItem("@tasks", JSON.stringify({ tasks: updatedTasks }));
+  };
+
+  const deleteTask = (id: number) => {
+    const deleteTasks = tasks.filter((task: any) => task.id !== id)
+    localStorage.setItem("@tasks", JSON.stringify({ tasks: deleteTasks }));
+
+    setTasks(deleteTasks);
+    alert("Tarefa excluida com sucesso!")
+  }
+
+  const taskCompleted = tasks.filter(task => task.completed).length
 
   return (
     <>
@@ -53,7 +81,7 @@ export function App() {
           </div>
           <div className={styles.createTasks}>
             <h2>Tarefas Concluídas</h2>
-            <span>2 de 5</span>
+            <span>{taskCompleted} de {tasks.length}</span>
           </div>
         </div>
         {
@@ -64,6 +92,9 @@ export function App() {
                   < Task
                     key={task.id}
                     data={task}
+                    tasks={tasks}
+                    deleteTask={deleteTask}
+                    checkboxChange={checkboxChange}
                   />
                 ))
               }

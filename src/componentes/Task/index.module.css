@@ -1,6 +1,6 @@
 .taskWrapper{
   min-width: 20rem;
-    padding: 1% 5%;
+    padding:1rem;
     border-radius:0.5rem;
     background: var(--gray-500);
     display: flex;
@@ -38,7 +38,6 @@ p{
     display: block;
     position: relative;
     padding-left: 2rem;
-    margin-bottom: 1rem;
     cursor: pointer;
     font-size:1.5rem;
   }
@@ -70,7 +69,10 @@ p{
   .container input:checked ~ .checkmark {
     background-color: var( --purple-dark);
   }
-  
+  input[type="checkbox"]:checked + .checkmark + p {
+    text-decoration: line-through;
+  }
+
   .container .checkmark:after {
     content: "";
     position: absolute;
@@ -85,10 +87,16 @@ p{
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
+
+  .container input:checked ~ .checkmark p{
+    text-decoration: line-through;
+  }
   
   .container input:checked ~ .checkmark:after {
     display: block;
   }
+
+
 
   @media(max-width:700px){
     .container .checkmark:after {
@@ -100,7 +108,6 @@ p{
 }
 
 @media(min-width:1900px){
-
    
     .container .checkmark:after {
         left: 0.3rem;
