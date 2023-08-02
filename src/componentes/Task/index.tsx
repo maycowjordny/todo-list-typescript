@@ -1,8 +1,9 @@
 import { useState, ChangeEvent } from "react"
 import styles from "./index.module.css"
 import { Trash } from "@phosphor-icons/react"
+import { FunctionsProps } from "../../interfaces"
 
-export function Task(props: any,) {
+export function Task(props: FunctionsProps) {
 
     const [checkboxState, setCheckboxState] = useState(props.data.completed)
 

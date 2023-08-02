@@ -5,14 +5,8 @@ import styles from "./app.module.css";
 import { Task } from "./componentes/Task";
 import noTasksSvg from "./assets/noTasksIcon.svg";
 import { useEffect, useState } from "react";
-
+import { TaskProps } from "./interfaces/index"
 export function App() {
-
-  interface TaskProps {
-    completed: boolean
-    id: number
-    description: string
-  }
 
   const [tasks, setTasks] = useState<TaskProps[]>([])
   const [description, setDescription] = useState("")
@@ -33,6 +27,12 @@ export function App() {
       id: Date.now(),
       completed: false
     }
+
+    if (!description) {
+      alert("Insira uma tarefa")
+      return
+    }
+
     setTasks((oldTasks) => [...oldTasks, task])
     localStorage.setItem("@tasks", JSON.stringify({ tasks: [...tasks, task] }));
     setDescription("")
@@ -40,7 +40,7 @@ export function App() {
 
   const checkboxChange = (id: number, checked: boolean) => {
 
-    const updatedTasks = tasks.map((task: any) => {
+    const updatedTasks = tasks.map((task: TaskProps) => {
 
       if (task.id === id) {
         return { ...task, completed: checked }
@@ -52,7 +52,7 @@ export function App() {
   };
 
   const deleteTask = (id: number) => {
-    const deleteTasks = tasks.filter((task: any) => task.id !== id)
+    const deleteTasks = tasks.filter((task: TaskProps) => task.id !== id)
     localStorage.setItem("@tasks", JSON.stringify({ tasks: deleteTasks }));
 
     setTasks(deleteTasks);
@@ -92,13 +92,11 @@ export function App() {
                   < Task
                     key={task.id}
                     data={task}
-                    tasks={tasks}
                     deleteTask={deleteTask}
                     checkboxChange={checkboxChange}
                   />
                 ))
               }
-
             </>
             :
             <div className={styles.noTasksWrapper}>
